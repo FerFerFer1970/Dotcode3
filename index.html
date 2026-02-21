@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DotCodeGUI</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 18px; }
+    .row { margin: 12px 0; }
+    label { display:block; margin-bottom: 6px; font-weight: 600; }
+    input[type="text"], textarea { width: 100%; padding: 10px; box-sizing: border-box; }
+    textarea { height: 90px; resize: vertical; }
+    .inline { display:flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    button { padding: 10px 14px; cursor: pointer; }
+    .box { border: 1px solid #ddd; padding: 12px; border-radius: 10px; }
+    .muted { color:#666; font-size: 13px; }
+    .status { white-space: pre-wrap; font-family: ui-monospace, Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <h2>DotCodeGUI</h2>
+
+  <div class="box">
+    <div class="row">
+      <label>Código a codificar (payload)</label>
+      <input id="payload" type="text" value="AAA123456" />
+      <div class="muted">Ejemplo: AAA123456 o (01)GTIN(21)SERIE si usas GS1.</div>
+    </div>
+
+    <div class="row">
+      <label>Texto para reemplazar los puntos (se repetirá)</label>
+      <textarea id="replaceText">ENUNLUGARDELAMANCHADECUYONOMBRENOQUIEROACORDARMENOHAMUCHOVIVIAUNHIDALGO</textarea>
+      <div class="muted">⚠️ El SVG reemplazado no será escaneable como DotCode.</div>
+    </div>
+
+    <div class="row inline">
+      <label style="margin:0;">
+        <input id="useGs1" type="checkbox" />
+        Usar GS1 DotCode
+      </label>
+
+      <div class="inline">
+        <span>Font-size letras:</span>
+        <input id="fontSize" type="text" value="5" style="width:70px;" />
+      </div>
+    </div>
+
+<div class="inline">
+  <span>Escala DotCode:</span>
+  <input id="scale" type="number" value="4" min="1" max="10" style="width:70px;" />
+</div>
+
+<div class="inline">
+  <span>Tamaño final (px):</span>
+  <input id="finalSize" type="number" value="300" min="100" max="2000" style="width:90px;" />
+</div>
+
+<div class="row">
+  <label>Texto para rellenar celdas vacías</label>
+  <input id="fillEmpty" type="text" value="." />
+</div>
+
+    <div class="row inline">
+      <button id="choose">Elegir carpeta de salida…</button>
+      <div class="muted" id="outDir">(sin seleccionar)</div>
+    </div>
+
+    <div class="row inline">
+      <button id="generate">Generar SVG</button>
+    </div>
+
+    <div class="row">
+      <div class="status" id="status"></div>
+    </div>
+  </div>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>
