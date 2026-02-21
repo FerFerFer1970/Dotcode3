@@ -1,12 +1,16 @@
 const payloadEl = document.getElementById('payload');
 const replaceEl = document.getElementById('replaceText');
+const fillEmptyEl = document.getElementById('fillEmpty');
+
 const useGs1El = document.getElementById('useGs1');
-const outDirEl = document.getElementById('outDir');
-const statusEl = document.getElementById('status');
-const fontSizeEl = document.getElementById('fontSize');
+const repeatEl = document.getElementById('repeatReplaceText');
+
 const scaleEl = document.getElementById('scale');
 const finalSizeEl = document.getElementById('finalSize');
-const fillEmptyEl = document.getElementById('fillEmpty');
+const fontSizeEl = document.getElementById('fontSize');
+
+const outDirEl = document.getElementById('outDir');
+const statusEl = document.getElementById('status');
 
 let outDir = null;
 
@@ -25,24 +29,18 @@ document.getElementById('choose').addEventListener('click', async () => {
 document.getElementById('generate').addEventListener('click', async () => {
   try {
     setStatus('Generando...');
+
     const res = await window.api.generate({
       payload: payloadEl.value,
       replaceText: replaceEl.value,
+      fillEmpty: fillEmptyEl.value,
       useGs1: useGs1El.checked,
+      repeatReplaceText: repeatEl.checked,
       outDir,
-      fontSize: fontSizeEl.value
+      scale: scaleEl.value,
+      finalSize: finalSizeEl.value,
+      fontSize: fontSizeEl.value,
     });
-
-const res = await window.api.generate({
-  payload: payloadEl.value,
-  replaceText: replaceEl.value,
-  useGs1: useGs1El.checked,
-  outDir,
-  fontSize: fontSizeEl.value,
-  scale: scaleEl.value,
-  finalSize: finalSizeEl.value,
-  fillEmpty: fillEmptyEl.value
-});
 
     setStatus(
       `✅ Listo\n` +
